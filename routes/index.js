@@ -10,4 +10,12 @@ router.get('/about', function(req, res, next) {
   res.render('about', null)
 })
 
+
+router.post('/:action', function(req, res, next) {
+  var action = req.params.action
+  if (action == 'contact') {
+    console.log(req.body)    
+  }
+})
+
 module.exports = router;
