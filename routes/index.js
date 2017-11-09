@@ -11,7 +11,12 @@ router.get('/about', function(req, res, next) {
 })
 
 router.get('/project/:name', function(req, res, next) {
+  var pages = ['podcast', 'venue', 'bookmark', 'ecommerce']
   var name = req.params.name
+
+  if (pages.indexOf(name) == -1) {
+    res.render('error', {message: "Page does not exist.  Please check your spelling."})
+  }
 
   res.render(name, null)
 })
