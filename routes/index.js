@@ -10,6 +10,10 @@ router.get('/about', function(req, res, next) {
   res.render('about', null)
 })
 
+router.get('/confirmation', function(req, res, next) {
+  res.render('confirmation', null)
+})
+
 router.get('/project/:name', function(req, res, next) {
   var pages = ['podcast', 'venue', 'bookmark', 'ecommerce']
   var name = req.params.name
