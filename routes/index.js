@@ -10,6 +10,12 @@ router.get('/about', function(req, res, next) {
   res.render('about', null)
 })
 
+router.get('/project/:name', function(req, res, next) {
+  var name = req.params.name
+
+  res.render(name, null)
+})
+
 
 router.post('/:action', function(req, res, next) {
   var action = req.params.action
