@@ -29,7 +29,7 @@ router.get('/project/:name', function(req, res, next) {
 router.post('/:action', function(req, res, next) {
   var action = req.params.action
   if (action == 'contact') {
-    console.log(req.body)    
+    res.redirect('/confirmation')  
   }
 })
 
