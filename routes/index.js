@@ -1,16 +1,14 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
-var helper = require('sendgrid').mail;
-var from_email = new helper.Email('josephkim0224@gmail.com');
-var to_email = new helper.Email('josephkim0224@gmail.com');
-var subject = 'Hello World from the SendGrid Node.js Library!';
-var content = new helper.Content('text/plain', 'Hello, Email!');
-var mail = new helper.Mail(from_email, subject, to_email, content);
+var helper = require('sendgrid').mail
+var from_email = new helper.Email('josephkim0224@gmail.com')
+var to_email = new helper.Email('josephkim0224@gmail.com')
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express' })
 })
 
 router.get('/about', function(req, res, next) {
@@ -37,17 +35,21 @@ router.post('/:action', function(req, res, next) {
   var action = req.params.action
   if (action == 'contact') {
 
-    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+    var subject = req.body.subject
+    var content = new helper.Content('text/plain', req.body.message)
+    var mail = new helper.Mail(from_email, subject, to_email, content)
+
+    var sg = require('sendgrid')(process.env.SENDGRID_API_KEY)
     var request = sg.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
       body: mail.toJSON(),
-    });
+    })
 
     sg.API(request, function(error, response) {
-      console.log(response.statusCode);
-      console.log(response.body);
-      console.log(response.headers);
+      console.log(response.statusCode)
+      console.log(response.body)
+      console.log(response.headers)
     
       if (error) {
         res.json({
@@ -58,16 +60,10 @@ router.post('/:action', function(req, res, next) {
         return
       }
 
-      res.json({
-        confirmation: 'success',
-        response: response.body
-      })
-
+      res.redirect('/confirmation')
       return
-    });
-    
-    res.redirect('/confirmation')  
+    })
   }
 })
 
-module.exports = router;
+module.exports = router
