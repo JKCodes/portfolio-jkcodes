@@ -1,12 +1,6 @@
 var express = require('express')
 var router = express.Router()
 
-var helper = require('sendgrid').mail
-var from_email = new helper.Email('josephkim0224@gmail.com')
-var to_email = new helper.Email('josephkim0224@gmail.com')
-
-
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' })
 })
@@ -35,6 +29,9 @@ router.post('/:action', function(req, res, next) {
   var action = req.params.action
   if (action == 'contact') {
 
+    var helper = require('sendgrid').mail
+    var from_email = new helper.Email(process.env.SENDGRID_DEFAULT_EMAIL)
+    var to_email = new helper.Email(process.env.SENDGRID_DEFAULT_EMAIL)
     var subject = req.body.subject
     var content = new helper.Content('text/plain', req.body.message)
     var mail = new helper.Mail(from_email, subject, to_email, content)
