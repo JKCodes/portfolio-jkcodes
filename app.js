@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var sendgrid = require('./routes/sendgrid');
+require('dotenv').config()
 
 var app = express();
 
