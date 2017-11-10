@@ -39,4 +39,4 @@ gulp.task('css', function() {
     .pipe(gp_concat('style.min.css'))
     .pipe(gulp.dest('./public/build/css/'))
 })
-gulp.task('default', ['build'], function(){})
+gulp.task('default', ['build', 'css'], function(){})
