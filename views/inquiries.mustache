@@ -17,15 +17,33 @@
               <div class="heading-block center nomargin">
                 <h3>Inquiries</h3>
               </div>
-            </div>
-          </div>
 
-          <div class="container clearfix">
-            {{#list}}
-              {{subject}}
-            {{/list}}
-          </div>  
-    
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <td>Subject</td>
+                    <td>Email</td>
+                    <td>Name</td>
+                    <td>Message</td>
+                    <td>Timestamp</td>
+                  </tr>
+                </thead> 
+                <tbody>
+                  {{#list}}
+                    <tr>
+                      <td>{{subject}}</td>
+                      <td>{{email}}</td>
+                      <td>{{fullName}}</td>
+                      <td>{{message}}</td>
+                      <td>{{timestamp}}</td>
+                    </tr>
+                  {{/list}}
+                </tbody>
+              </table>
+
+              
+            </div>
+          </div>    
         </div>
 
       </section>
