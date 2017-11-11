@@ -10,6 +10,10 @@ router.get('/about', function(req, res, next) {
   res.render('about', null)
 })
 
+router.get('/inquiries', function(req, res, next) {
+  res.render('inquiries', null)
+})
+
 router.get('/confirmation', function(req, res, next) {
   res.render('confirmation', null)
 })
