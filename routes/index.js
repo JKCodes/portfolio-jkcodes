@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var Inquiry = require('../models/Inquiry')
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' })
@@ -28,6 +29,19 @@ router.get('/project/:name', function(req, res, next) {
 router.post('/:action', function(req, res, next) {
   var action = req.params.action
   if (action == 'contact') {
+    Inquiry.create(req.body, function(err, inquiry) {
+      if (err) {
+        res.json({
+          confirmation: 'fail',
+          message: err
+        })
+
+        return
+      }
+
+      
+    })
+
 
     var helper = require('sendgrid').mail
     var from_email = new helper.Email(process.env.SENDGRID_DEFAULT_EMAIL)
