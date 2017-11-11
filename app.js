@@ -11,7 +11,7 @@ var compression = require('compression')
 var mongoose = require('mongoose')
 require('dotenv').config()
 
-var dbUrl = 'mongodb://localhost/portfolio'
+var dbUrl = process.env.DB_URL
 mongoose.connect(dbUrl, function(err, res) {
   if (err) {
     console.log('DB Connection Failed: ' + err)
