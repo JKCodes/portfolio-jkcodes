@@ -4,12 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 var sendgrid = require('./routes/sendgrid');
 var compression = require('compression')
+var mongoose = require('mongoose')
 require('dotenv').config()
+
+var dbUrl = 'mongodb://localhost/portfolio'
+mongoose.connect(dbUrl, function(err, res) {
+  if (err) {
+    console.log('DB Connection Failed: ' + err)
+  } else {
+    console.log('DB Connection Success: ' + dbUrl)
+  }
+})
 
 var app = express();
 
