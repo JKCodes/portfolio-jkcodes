@@ -10,6 +10,10 @@ router.get('/about', function(req, res, next) {
   res.render('about', null)
 })
 
+router.get('/createproject', function(req, res, next) {
+  res.render('createproject', null)
+})
+
 router.get('/inquiries', function(req, res, next) {
   Inquiry.find(null, function(err, inquiries) {
     if (err) {
