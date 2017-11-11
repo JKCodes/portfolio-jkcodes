@@ -11,7 +11,18 @@ router.get('/about', function(req, res, next) {
 })
 
 router.get('/inquiries', function(req, res, next) {
-  res.render('inquiries', null)
+  Inquiry.find(null, function(err, inquiries) {
+    if (err) {
+      res.render('error', err)
+      return
+    }
+
+    console.log(JSON.stringify(inquiries))
+    var data = {
+      list: inquiries
+    }
+    res.render('inquiries', data)
+  })
 })
 
 router.get('/confirmation', function(req, res, next) {
