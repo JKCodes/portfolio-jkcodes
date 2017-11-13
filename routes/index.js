@@ -22,6 +22,23 @@ router.get('/', function(req, res, next) {
 router.get('/:page', function(req, res, next) {
   // about, createproject, confirmation pages
   var page = req.params.page
+
+  if (page == 'inquiries') {
+    Inquiry.find(null, function(err, inquiries) {
+      if (err) {
+        res.render('error', err)
+        return
+      }
+
+      var data = {
+        list: inquiries
+      }
+      res.render('inquiries', data)
+    })
+
+    return
+  }
+
   res.render(page, null)
 })
 
@@ -38,32 +55,8 @@ router.get('/project/:id', function(req, res, next) {
   })
 })
 
-router.get('/inquiries', function(req, res, next) {
-  Inquiry.find(null, function(err, inquiries) {
-    if (err) {
-      res.render('error', err)
-      return
-    }
 
-    console.log(JSON.stringify(inquiries))
-    var data = {
-      list: inquiries
-    }
-    res.render('inquiries', data)
-  })
-})
-
-router.get('/project/:name', function(req, res, next) {
-  var pages = ['podcast', 'venue', 'bookmark', 'ecommerce']
-  var name = req.params.name
-
-  if (pages.indexOf(name) == -1) {
-    res.render('error', {message: "Page does not exist.  Please check your spelling."})
-  }
-
-  res.render(name, null)
-})
-
+// POST
 
 router.post('/:action', function(req, res, next) {
   var action = req.params.action
