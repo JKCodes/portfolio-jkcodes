@@ -4,7 +4,19 @@ var Inquiry = require('../models/Inquiry')
 var Project = require('../models/Project')
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' })
+
+  Project.find(null, function(err, projects) {
+    if (err) {
+      res.render('error', err)
+      return
+    }
+
+    var data = {
+      list: projects
+    }
+
+    res.render('index', data)
+  })
 })
 
 router.get('/about', function(req, res, next) {
@@ -12,7 +24,7 @@ router.get('/about', function(req, res, next) {
 })
 
 router.get('/createproject', function(req, res, next) {
-  
+
   res.render('createproject', null)
 })
 

@@ -48,8 +48,27 @@
 
           <div class="container clearfix">
             <div class="row">
-
-              <div class="col-md-3 col-sm-6 bottommargin">
+              {{#list}}
+                <div class="col-md-4 col-sm-6 bottommargin">
+                  <div class="ipost clearfix">
+                    <div class="entry-image">
+                      <a href="#"><img class="image_fade" src="images/projects/{{image}}" alt="Image"></a>
+                    </div>
+                    <div class="entry-title">
+                      <h3><a href="/project/{{name}}">{{name}}</a></h3>
+                    </div>
+                    <ul class="entry-meta clearfix">
+                      {{#tools}}
+                        <li>{{.}}</li>
+                      {{/tools}}
+                    </ul>
+                    <div class="entry-content">
+                      <p>{{description}}</p>
+                    </div>
+                  </div>
+                </div>
+              {{/list}}
+              <div class="col-md-4 col-sm-6 bottommargin">
                 <div class="ipost clearfix">
                   <div class="entry-image">
                     <a href="#"><img class="image_fade" src="images/podcast-jkcodes.png" alt="Image"></a>
@@ -70,7 +89,7 @@
                 </div>
               </div>
 
-              <div class="col-md-3 col-sm-6 bottommargin">
+ <!--              <div class="col-md-3 col-sm-6 bottommargin">
                 <div class="ipost clearfix">
                   <div class="entry-image">
                     <a href="#"><img class="image_fade" src="images/venue-search.png" alt="Image"></a>
@@ -130,13 +149,13 @@
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
             </div>
 
             <div class="postcontent notopmargin">
 
-              <h3>Send us an Email</h3>
+              <h3>Send me an Email</h3>
 
               <div>
 
