@@ -63,6 +63,9 @@ router.post('/:action', function(req, res, next) {
   var action = req.params.action
 
   if (action == 'project') {
+    var params = req.body
+    var tools = params.tools
+    params['tools'] = tools.split(',').map((tool) => tool.trim())
 
     Project.create(req.body, function(err, project) {
       if (err) {
