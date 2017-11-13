@@ -6,6 +6,15 @@ router.get('/:resource', function(req, res, next) {
   var resource = req.params.resource
   var controller = controllers[resource]
 
+  if (controller == null) {
+    res.json({
+      confirmation: 'fail',
+      message: 'Invalid Resource'
+    })
+
+    return
+  }
+
   controller.find(req.query, function(err, results) {
     if (err) {
       res.json({
@@ -28,6 +37,15 @@ router.get('/:resource/:id', function(req, res, next) {
   var id = req.params.id
   var controller = controllers[resource]
 
+  if (controller == null) {
+    res.json({
+      confirmation: 'fail',
+      message: 'Invalid Resource'
+    })
+
+    return
+  }
+
   controller.findById(id, function(err, result) {
     if (err) {
       res.json({
@@ -48,6 +66,15 @@ router.get('/:resource/:id', function(req, res, next) {
 router.post('/:resource', function(req, res, next) {
   var resource = req.params.resource
   var controller = controllers[resource]
+
+  if (controller == null) {
+    res.json({
+      confirmation: 'fail',
+      message: 'Invalid Resource'
+    })
+
+    return
+  }
 
   controller.create(req.body, function(err, result) {
     if (err) {
@@ -71,6 +98,15 @@ router.put('/:resource/:id', function(req, res, next) {
   var id = req.params.id
   var controller = controllers[resource]
 
+  if (controller == null) {
+    res.json({
+      confirmation: 'fail',
+      message: 'Invalid Resource'
+    })
+
+    return
+  }
+
   controller.update(id, req.body, function(err, result) {
     if (err) {
       res.json({
@@ -92,6 +128,15 @@ router.delete('/:resource/:id', function(req, res, next) {
   var resource = req.params.resource
   var id = req.params.id
   var controller = controllers[resource]
+
+  if (controller == null) {
+    res.json({
+      confirmation: 'fail',
+      message: 'Invalid Resource'
+    })
+
+    return
+  }
 
   controller.delete(id, function(err) {
     if (err) {
