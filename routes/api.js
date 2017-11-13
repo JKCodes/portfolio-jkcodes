@@ -6,7 +6,7 @@ router.get('/:resource', function(req, res, next) {
   var resource = req.params.resource
 
   if (resource == 'project') {
-    Project.find(null, function(err, projects) {
+    Project.find(req.query, function(err, projects) {
       if (err) {
         res.json({
           confirmation: 'fail',
@@ -33,7 +33,7 @@ router.get('/:resource/:id', function(req, res, next) {
       if (err) {
         res.json({
           confirmation: 'fail',
-          message: err
+          message: 'There is no project with that id'
         })
 
         return
