@@ -19,13 +19,23 @@ router.get('/', function(req, res, next) {
   })
 })
 
-router.get('/about', function(req, res, next) {
-  res.render('about', null)
+router.get('/:page', function(req, res, next) {
+  // about, createproject, confirmation pages
+  var page = req.params.page
+  res.render(page, null)
 })
 
-router.get('/createproject', function(req, res, next) {
+router.get('/project/:id', function(req, res, next) {
 
-  res.render('createproject', null)
+  var projectId = req.params.id
+  Project.findById(projectId, function(err, project) {
+    if (err) {
+      res.render('error', err)
+      return
+    }
+
+    res.render('project', project)
+  })
 })
 
 router.get('/inquiries', function(req, res, next) {
@@ -41,10 +51,6 @@ router.get('/inquiries', function(req, res, next) {
     }
     res.render('inquiries', data)
   })
-})
-
-router.get('/confirmation', function(req, res, next) {
-  res.render('confirmation', null)
 })
 
 router.get('/project/:name', function(req, res, next) {
