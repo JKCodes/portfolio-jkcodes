@@ -1,117 +1,112 @@
 var express = require('express')
 var router = express.Router()
-var Project = require('../models/Project')
+var controllers = require('../controllers')
 
 router.get('/:resource', function(req, res, next) {
   var resource = req.params.resource
+  var controller = controllers[resource]
 
-  if (resource == 'project') {
-    Project.find(req.query, function(err, projects) {
-      if (err) {
-        res.json({
-          confirmation: 'fail',
-          message: err
-        })
-
-        return
-      }
-
+  controller.find(req.query, function(err, results) {
+    if (err) {
       res.json({
-        confirmation: 'success',
-        results: projects
+        confirmation: 'fail',
+        message: err
       })
+
+      return
+    }
+
+    res.json({
+      confirmation: 'success',
+      results: results
     })
-  }
+  })
 })
 
 router.get('/:resource/:id', function(req, res, next) {
   var resource = req.params.resource
   var id = req.params.id
+  var controller = controllers[resource]
 
-  if (resource == 'project') {
-    Project.findById(id, function(err, project) {
-      if (err) {
-        res.json({
-          confirmation: 'fail',
-          message: 'There is no project with that id'
-        })
-
-        return
-      }
-
+  controller.findById(id, function(err, result) {
+    if (err) {
       res.json({
-        confirmation: 'success',
-        result: project
+        confirmation: 'fail',
+        message: 'Not Found'
       })
+
+      return
+    }
+
+    res.json({
+      confirmation: 'success',
+      result: result
     })
-  }
+  })
 })
 
 router.post('/:resource', function(req, res, next) {
   var resource = req.params.resource
+  var controller = controllers[resource]
 
-  if (resource == 'project') {
-    Project.create(req.body, function(err, project) {
-      if (err) {
-        res.json({
-          confirmation: 'fail',
-          message: err
-        })
-
-        return
-      }
-
+  controller.create(req.body, function(err, result) {
+    if (err) {
       res.json({
-        confirmation: 'success',
-        result: project
+        confirmation: 'fail',
+        message: err
       })
+
+      return
+    }
+
+    res.json({
+      confirmation: 'success',
+      result: result
     })
-  }
+  })
 })
 
 router.put('/:resource/:id', function(req, res, next) {
   var resource = req.params.resource
   var id = req.params.id
+  var controller = controllers[resource]
 
-  if (resource == 'project') {
-    Project.findByIdAndUpdate(id, req.body, {new:true} function(err, project) {
-      if (err) {
-        res.json({
-          confirmation: 'fail',
-          message: err
-        })
-
-        return
-      }
-
+  controller.update(id, req.body, function(err, result) {
+    if (err) {
       res.json({
-        confirmation: 'success',
-        result: project
+        confirmation: 'fail',
+        message: err
       })
+
+      return
+    }
+
+    res.json({
+      confirmation: 'success',
+      result: result
     })
-  }
+  })
 })
 
 router.delete('/:resource/:id', function(req, res, next) {
   var resource = req.params.resource
   var id = req.params.id
+  var controller = controllers[resource]
 
-  if (resource == 'project') {
-    Project.findByIdAndRemove(id, function(err) {
-      if (err) {
-        res.json({
-          confirmation: 'fail',
-          message: err
-        })
-
-        return
-      }
-
+  controller.delete(id, function(err) {
+    if (err) {
       res.json({
-        confirmation: 'success',
+        confirmation: 'fail',
+        message: err
       })
+
+      return
+    }
+
+    res.json({
+      confirmation: 'success'
     })
-  }
+  })
 })
 
 module.exports = router
