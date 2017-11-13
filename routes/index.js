@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var Inquiry = require('../models/Inquiry')
+var Project = require('../models/Project')
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' })
@@ -47,6 +48,24 @@ router.get('/project/:name', function(req, res, next) {
 
 router.post('/:action', function(req, res, next) {
   var action = req.params.action
+
+  if (action == 'project') {
+
+    Project.create(req.body, function(err, project) {
+      if (err) {
+        res.render('error', err)
+
+        return
+      }
+
+      res.json({
+        project: project
+      })
+    })
+
+    return
+  }
+
   if (action == 'contact') {
     Inquiry.create(req.body, function(err, inquiry) {
       if (err) {
