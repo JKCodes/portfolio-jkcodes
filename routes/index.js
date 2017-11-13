@@ -45,7 +45,9 @@ router.get('/:page', function(req, res, next) {
   var staticPages = {
     about: 'about',
     createproject: 'createproject',
-    confirmation: 'confirmation'
+    confirmation: 'confirmation',
+    contact: 'contact',
+    blog: 'blog'
   }
 
   var template = staticPages[page]
