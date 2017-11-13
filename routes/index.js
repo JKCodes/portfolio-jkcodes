@@ -21,6 +21,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/:page', function(req, res, next) {
   var page = req.params.page
+  if (page == 'api') {
+    next()
+    return
+  }
 
   if (page == 'inquiries') {
     Inquiry.find(null, function(err, inquiries) {
