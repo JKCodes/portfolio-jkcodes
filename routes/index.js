@@ -20,7 +20,6 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/:page', function(req, res, next) {
-  // about, createproject, confirmation pages
   var page = req.params.page
 
   if (page == 'inquiries') {
@@ -36,6 +35,19 @@ router.get('/:page', function(req, res, next) {
       res.render('inquiries', data)
     })
 
+    return
+  }
+
+  var staticPages = {
+    about: 'about',
+    createproject: 'createproject',
+    confirmation: 'confirmation'
+  }
+
+  var template = staticPages[page]
+  
+  if (template ==  null) {
+    res.render('error', {message: 'Invalid Page'})
     return
   }
 
