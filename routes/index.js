@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 var Inquiry = require('../models/Inquiry')
 var Project = require('../models/Project')
+var superagent = require('superagent')
 
 router.get('/', function(req, res, next) {
 
@@ -27,18 +28,25 @@ router.get('/:page', function(req, res, next) {
   }
 
   if (page == 'inquiries') {
-    Inquiry.find(null, function(err, inquiries) {
+    superagent
+    .get('http://localhost:3000/api/inquiry')
+    .query(null)
+    .set('Accept', 'application/json')
+    .end((err, response) => {
+
+      console.log(err)
+
       if (err) {
         res.render('error', err)
         return
       }
 
       var data = {
-        list: inquiries
+        list: JSON.parse(response.text).results
       }
       res.render('inquiries', data)
     })
-
+    
     return
   }
 
