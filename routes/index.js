@@ -1,7 +1,5 @@
 var express = require('express')
 var router = express.Router()
-var Inquiry = require('../models/Inquiry')
-var Project = require('../models/Project')
 var superagent = require('superagent')
 
 router.get('/', function(req, res, next) {
@@ -33,9 +31,6 @@ router.get('/:page', function(req, res, next) {
     .query(null)
     .set('Accept', 'application/json')
     .end((err, response) => {
-
-      console.log(err)
-
       if (err) {
         res.render('error', err)
         return
@@ -46,7 +41,7 @@ router.get('/:page', function(req, res, next) {
       }
       res.render('inquiries', data)
     })
-    
+
     return
   }
 
@@ -108,7 +103,12 @@ router.post('/:action', function(req, res, next) {
   }
 
   if (action == 'contact') {
-    Inquiry.create(req.body, function(err) {
+
+    superagent
+    .post('http://localhost:3000/api/inquiry')
+    .send(req.body)
+    .set('Accept', 'application/json')
+    .end((err, response) => {
       if (err) {
         res.render('error', err)
         return
@@ -116,7 +116,18 @@ router.post('/:action', function(req, res, next) {
 
       res.redirect('/confirmation')
     })
+
+    return
   }
+
+    // Inquiry.create(req.body, function(err) {
+    //   if (err) {
+    //     res.render('error', err)
+    //     return
+    //   }
+
+    //   res.redirect('/confirmation')
+    // })
 })
 
 module.exports = router
