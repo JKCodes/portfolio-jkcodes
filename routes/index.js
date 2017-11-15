@@ -57,6 +57,7 @@ router.get('/:page', function(req, res, next) {
     return
   }
 
+  if (template == 'blog') res.redirect('http://jkcodes.com/')
   res.render(page, null)
 })
 
