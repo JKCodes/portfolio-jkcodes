@@ -20,6 +20,23 @@ function getResource(res, resource, page) {
   })
 }
 
+function postResource(params, res, resource, page) {
+  superagent
+  .post(`http://localhost:3000/api/${resource}`)
+  .send(params)
+  .set('Accept', 'application/json')
+  .end((err, response) => {
+    if (err) {
+      res.render('error', err)
+      return
+    }
+
+    console.log(response.text)
+
+    res.redirect(page)
+  })
+}
+
 router.get('/', function(req, res, next) {
   getResource(res, 'project', 'index')
 })
@@ -37,7 +54,6 @@ router.get('/:page', function(req, res, next) {
 
   if (page == 'inquiries') {
     getResource(res, 'inquiry', page)
-
     return
   }
 
@@ -61,15 +77,21 @@ router.get('/:page', function(req, res, next) {
 })
 
 router.get('/project/:id', function(req, res, next) {
-
   var projectId = req.params.id
-  Project.findById(projectId, function(err, project) {
+
+  superagent
+  .get(`http://localhost:3000/api/project/${projectId}`)
+  .query(null)
+  .set('Accept', 'application/json')
+  .end((err, response) => {
     if (err) {
       res.render('error', err)
       return
     }
 
-    res.render('project', project)
+    console.log(response.text)
+
+    res.render('project', JSON.parse(response.text).result)
   })
 })
 
@@ -84,35 +106,12 @@ router.post('/:action', function(req, res, next) {
     var tools = params.tools
     params['tools'] = tools.split(',').map((tool) => tool.trim())
 
-    Project.create(req.body, function(err, project) {
-      if (err) {
-        res.render('error', err)
-        return
-      }
-
-      res.json({
-        project: project
-      })
-    })
-
+    postResource(params, res, 'project', '/')
     return
   }
 
   if (action == 'contact') {
-
-    superagent
-    .post('http://localhost:3000/api/inquiry')
-    .send(req.body)
-    .set('Accept', 'application/json')
-    .end((err, response) => {
-      if (err) {
-        res.render('error', err)
-        return
-      }
-
-      res.redirect('/confirmation')
-    })
-
+    postResource(req.body, res, 'inquiry', '/confirmation')
     return
   }
 })

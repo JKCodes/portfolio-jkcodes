@@ -50,7 +50,7 @@
                 <div class="col-md-4 col-sm-6 bottommargin">
                   <div class="ipost clearfix">
                     <div class="entry-image">
-                      <a href="/project/{{_id}}"><img class="image_fade" src="/images/projects/{{image}}" alt="Image"></a>
+                      <a href="/project/{{_id}}"><img class="image_fade" src="/images/projects/{{image}}{{extension}}" alt="Image"></a>
                     </div>
                     <div class="entry-title">
                       <h3><a href="/project/{{_id}}">{{name}}</a></h3>
@@ -61,7 +61,7 @@
                       {{/tools}}
                     </ul>
                     <div class="entry-content">
-                      <p>{{github}}</p>
+                      <a href="{{github}}">{{github}}</p>
                     </div>
                   </div>
                 </div>

@@ -12,11 +12,59 @@
       <section id="content" style="background: #f9f9f9">
 
         <div class="content-wrap">
+
           <div class="container clearfix">
-            <h1>{{name}}</h1>    
+
+            <div class="postcontent nobottommargin col_last clearfix">
+
+              <div class="single-post nobottommargin">
+
+                <div class="entry clearfix">
+
+                  <h2>Screenshot</h2>
+
+                  <div class="container clearfix">
+
+                    <div class="entry-image">
+                      <img style="width: 65%" src="/images/projects/big/{{image}}-big{{extension}}" />
+                    </div>
+
+                    <h2>Demo</h2>
+
+                    <div class="entry-image">
+                      <iframe style="width: 65%; height: 65%" width="560" height="315" src={{demo}} frameborder="0" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="sidebar nobottommargin clearfix" style="border-right: 1px solid #DDD">
+              <div class="sidebar-widgets-wrap">
+
+                <div class="widget widget-twitter-feed clearfix">
+                  <h3>App Information</h3>
+                  <h4 class="nobottommargin">Name</h4> 
+                  <h5>{{name}}</h5> 
+                  <h4 class="nobottommargin">Links</h4> 
+                  <h5>(<a href="{{github}}">GitHub</a> | <a href="{{site}}">Site</a>)</h5>
+                  <h4 class="nobottommargin">Completed</h4> 
+                  <h5>{{month}} {{year}}</h5>
+                  <h4 class="nobottommargin">Description</h4>
+                  <h5>{{description}}</h5>
+                  <h4 class="nobottommargin">Tools Used</h4>
+                  <div style="margin-top: 5px" class="tagcloud clearfix bottommargin">
+                    {{#tools}}
+                      <a href="#">{{.}}</a>  
+                    {{/tools}}
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-          
       </section>
 
       {{>footer}}
