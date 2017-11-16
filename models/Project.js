@@ -6,6 +6,8 @@ var ProjectSchema = new mongoose.Schema({
   image: {type:String, default: ''},
   demo: {type:String, default: ''},
   tools: {type:Array, default:[]},
+  month: {type:String, default: ''},
+  year: {type:String, default: ''},
   timestamp: {type:Date, default: Date.now}
 })
 
