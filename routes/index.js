@@ -2,20 +2,26 @@ var express = require('express')
 var router = express.Router()
 var superagent = require('superagent')
 
-router.get('/', function(req, res, next) {
-
-  Project.find(null, function(err, projects) {
+function getResource(res, resource, page) {
+  superagent
+  .get(`http://localhost:3000/api/${resource}`)
+  .query(null)
+  .set('Accept', 'application/json')
+  .end((err, response) => {
     if (err) {
       res.render('error', err)
       return
     }
 
     var data = {
-      list: projects
+      list: JSON.parse(response.text).results
     }
-
-    res.render('index', data)
+    res.render(page, data)
   })
+}
+
+router.get('/', function(req, res, next) {
+  getResource(res, 'project', 'index')
 })
 
 router.get('/:page', function(req, res, next) {
@@ -25,22 +31,12 @@ router.get('/:page', function(req, res, next) {
     return
   }
 
-  if (page == 'inquiries') {
-    superagent
-    .get('http://localhost:3000/api/inquiry')
-    .query(null)
-    .set('Accept', 'application/json')
-    .end((err, response) => {
-      if (err) {
-        res.render('error', err)
-        return
-      }
+  if (page == null) {
+    res.render('/confirmation')
+  }
 
-      var data = {
-        list: JSON.parse(response.text).results
-      }
-      res.render('inquiries', data)
-    })
+  if (page == 'inquiries') {
+    getResource(res, 'inquiry', page)
 
     return
   }
@@ -119,15 +115,6 @@ router.post('/:action', function(req, res, next) {
 
     return
   }
-
-    // Inquiry.create(req.body, function(err) {
-    //   if (err) {
-    //     res.render('error', err)
-    //     return
-    //   }
-
-    //   res.redirect('/confirmation')
-    // })
 })
 
 module.exports = router
