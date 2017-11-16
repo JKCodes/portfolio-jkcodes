@@ -57,8 +57,12 @@ router.get('/:page', function(req, res, next) {
     return
   }
 
+  if (page == 'about') {
+    getResource(res, 'project', page)
+    return
+  }
+
   var staticPages = {
-    about: 'about',
     createproject: 'createproject',
     confirmation: 'confirmation',
     contact: 'contact',
