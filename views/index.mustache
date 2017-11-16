@@ -50,10 +50,10 @@
                 <div class="col-md-4 col-sm-6 bottommargin">
                   <div class="ipost clearfix">
                     <div class="entry-image">
-                      <a href="#"><img class="image_fade" src="images/projects/{{image}}" alt="Image"></a>
+                      <a href="/project/{{_id}}"><img class="image_fade" src="/images/projects/{{image}}" alt="Image"></a>
                     </div>
                     <div class="entry-title">
-                      <h3><a href="/project/{{name}}">{{name}}</a></h3>
+                      <h3><a href="/project/{{_id}}">{{name}}</a></h3>
                     </div>
                     <ul class="entry-meta clearfix">
                       {{#tools}}
@@ -61,15 +61,15 @@
                       {{/tools}}
                     </ul>
                     <div class="entry-content">
-                      <p>{{description}}</p>
+                      <p>{{github}}</p>
                     </div>
                   </div>
                 </div>
               {{/list}}
-              <div class="col-md-4 col-sm-6 bottommargin">
+              <!-- <div class="col-md-4 col-sm-6 bottommargin">
                 <div class="ipost clearfix">
                   <div class="entry-image">
-                    <a href="#"><img class="image_fade" src="images/podcast-jkcodes.png" alt="Image"></a>
+                    <a href="#"><img class="image_fade" src="images/projects/podcast.png" alt="Image"></a>
                   </div>
                   <div class="entry-title">
                     <h3><a href="/project/podcast">Podcast</a></h3>
@@ -85,7 +85,7 @@
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
  <!--              <div class="col-md-3 col-sm-6 bottommargin">
                 <div class="ipost clearfix">
