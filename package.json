@@ -15,6 +15,7 @@
     "express": "~4.15.5",
     "hjs": "~0.0.6",
     "hogan-middleware": "^0.2.2",
+    "method-override": "^2.3.10",
     "mongoose": "^4.13.1",
     "morgan": "~1.9.0",
     "sendgrid": "^5.2.3",
