@@ -31,9 +31,22 @@ function postResource(params, res, resource, page) {
       return
     }
 
-    console.log(response.text)
-
     res.redirect(page)
+  })
+}
+
+function getResourceById(id, res, resource, page) {
+  superagent
+  .get(`http://localhost:3000/api/${resource}/${id}`)
+  .query(null)
+  .set('Accept', 'application/json')
+  .end((err, response) => {
+    if (err) {
+      res.render('error', err)
+      return
+    }
+
+    res.render(page, JSON.parse(response.text).result)
   })
 }
 
@@ -83,20 +96,13 @@ router.get('/:page', function(req, res, next) {
 router.get('/project/:id', function(req, res, next) {
   var projectId = req.params.id
 
-  superagent
-  .get(`http://localhost:3000/api/project/${projectId}`)
-  .query(null)
-  .set('Accept', 'application/json')
-  .end((err, response) => {
-    if (err) {
-      res.render('error', err)
-      return
-    }
+  getResourceById(projectId, res, 'project', 'project')
+})
 
-    console.log(response.text)
+router.get('/updateproject/:id', function(req, res, next) {
+  var projectId = req.params.id
 
-    res.render('project', JSON.parse(response.text).result)
-  })
+  getResourceById(projectId, res, 'project', 'updateproject')
 })
 
 
@@ -118,6 +124,26 @@ router.post('/:action', function(req, res, next) {
     postResource(req.body, res, 'inquiry', '/confirmation')
     return
   }
+})
+
+// PUT
+
+router.put('/project/:id', function(req, res, next) {
+  var id = req.params.id
+  var params = req.body
+
+  superagent
+  .put(`http://localhost:3000/api/project/${id}`)
+  .send(params)
+  .set('Accept', 'application/json')
+  .end((err, response) => {
+    if (err) {
+      res.render('error', err)
+      return
+    }
+
+    res.redirect(`/project/${id}`)
+  })
 })
 
 module.exports = router
