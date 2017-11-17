@@ -131,6 +131,8 @@ router.post('/:action', function(req, res, next) {
 router.put('/project/:id', function(req, res, next) {
   var id = req.params.id
   var params = req.body
+  var tools = params.tools
+  params['tools'] = tools.split(',').map((tool) => tool.trim())
 
   superagent
   .put(`http://localhost:3000/api/project/${id}`)
