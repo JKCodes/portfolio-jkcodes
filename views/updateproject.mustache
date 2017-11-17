@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+  <head>
+    {{>head}}
+  </head>
+
+  <body class="stretched">
+
+    <div id="wrapper" class="clearfix">
+      {{>nav}}
+
+      <section id="content">
+        <div class="content-wrap" style="padding:0px">
+          <div class="section notopmargin" style="background:#fff;border-top:1px solid #ddd">
+            <div class="container clearfix">
+              <div class="heading-block center nomargin">
+                <h3>Update Project</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="container clearfix">
+            <div class="postcontent notopmargin">
+              <h3>Update Project</h3>
+
+              <div>
+
+                <div class="contact-form-result"></div>
+
+                <form class="nobottommargin" id="template-contactform" name="template-contactform" action="/project/{{_id}}?_method=put" method="post">
+
+                  <div class="form-process"></div>
+
+                  <div class="col_half">
+                    <label for="template-contactform-name">Name </label>
+                    <input type="text" id="template-contactform-name" name="name" value="{{name}}" class="sm-form-control required" placeholder="Demo Project" />
+                  </div>
+
+                  <div class="col_half col_last">
+                    <label for="template-contactform-name">GitHub URL</label>
+                    <input type="name" id="template-contactform-name" name="github" value="{{github}}" class="required name sm-form-control" placeholder="https:://www.google.com"/>
+                  </div>
+
+                  <div class="col_half">
+                    <label for="template-contactform-name">Site URL</label>
+                    <input type="name" id="template-contactform-name" name="site" value="{{site}}" class="required name sm-form-control" placeholder="https:://www.google.com"/>
+                  </div>
+
+                  <div class="col_half col_last">
+                    <label for="template-contactform-name">Demo URL</label>
+                    <input type="name" id="template-contactform-name" name="demo" value="{{demo}}" class="required name sm-form-control" placeholder="https:://www.google.com"/>
+                  </div>
+
+                  <div class="col_half">
+                    <label for="template-contactform-name">Image</label>
+                    <input type="name" id="template-contactform-name" name="image" value="{{image}}" class="required name sm-form-control" placeholder="image name without extension"/>
+                  </div>
+
+                  <div class="col_half col_last">
+                    <label for="template-contactform-name">Image Extension</label>
+                    <input type="name" id="template-contactform-name" name="extension" value="{{extension}}" class="required name sm-form-control" placeholder=".png, .jpg, etc."/>
+                  </div>
+
+                  <div class="col_half">
+                    <label for="template-contactform-name">Month</label>
+                    <input type="name" id="template-contactform-name" name="month" value="{{month}}" class="required name sm-form-control" placeholder="Jan, Feb, Mar, etc." />
+                  </div>
+
+                  <div class="col_half col_last">
+                    <label for="template-contactform-name">Year</label>
+                    <input type="name" id="template-contactform-name" name="year" value="{{year}}" class="required name sm-form-control" placeholder="1942, 1992, 2013, etc."/>
+                  </div>
+
+                  <div class="col_full">
+                    <label for="template-contactform-phone">Tools</label>
+                    <input type="text" id="template-contactform-phone" name="tools" value="{{tools}}" class="sm-form-control" placeholder="Enter list of items separated by a comma: 'React, Node, Mongo'"/>
+                  </div>
+
+                  <div class="clear"></div>
+
+                  <div class="col_full">
+                    <label for="template-contactform-message">Description </label>
+                    <textarea class="required sm-form-control" id="template-contactform-message" name="description" rows="6" cols="30" placeholder="Enter project description">{{description}}</textarea>
+                  </div>
+
+                  <div class="col_full">
+                    <button class="button button-3d nomargin" type="submit" id="template-contactform-submit" name="template-contactform-submit" value="submit">Update Project</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>  
+    
+        </div>
+
+      </section>
+
+      {{>footer}}
+
+    </div>
+
+    {{>script}}
+
+  </body>
+</html>
