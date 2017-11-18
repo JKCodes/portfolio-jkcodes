@@ -32,7 +32,7 @@ module.exports = {
 
       // send an email
       var helper = require('sendgrid').mail
-      var from_email = new helper.Email(process.env.SENDGRID_DEFAULT_EMAIL)
+      var from_email = new helper.Email(params.email)
       var to_email = new helper.Email(process.env.SENDGRID_DEFAULT_EMAIL)
       var subject = params.subject
       var content = new helper.Content('text/plain', params.message)
