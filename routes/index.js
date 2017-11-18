@@ -50,6 +50,15 @@ function getResourceById(id, res, resource, page) {
   })
 }
 
+function parseProjectParam(params) {
+  var tools = params.tools
+  var functionalities = params.functionalities
+  params['tools'] = tools.split(',').map((tool) => tool.trim())
+  params['functionalities'] = functionalities.split(',').map((functionality) => functionality.trim())
+
+  return params
+}
+
 router.get('/', function(req, res, next) {
   getResource(res, 'project', 'index')
 })
@@ -114,8 +123,7 @@ router.post('/:action', function(req, res, next) {
 
   if (action == 'project') {
     var params = req.body
-    var tools = params.tools
-    params['tools'] = tools.split(',').map((tool) => tool.trim())
+    params = parseProjectParam(params)
 
     postResource(params, res, 'project', '/')
     return
@@ -132,8 +140,7 @@ router.post('/:action', function(req, res, next) {
 router.put('/project/:id', function(req, res, next) {
   var id = req.params.id
   var params = req.body
-  var tools = params.tools
-  params['tools'] = tools.split(',').map((tool) => tool.trim())
+  params = parseProjectParam(params)
 
   superagent
   .put(`${process.env.HEROKU_URL || process.env.DEV_URL}/api/project/${id}`)

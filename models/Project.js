@@ -8,6 +8,7 @@ var ProjectSchema = new mongoose.Schema({
   demo: {type:String, default: ''},
   site: {type:String, default: '/nosite'},
   tools: {type:Array, default:[]},
+  functionalities: {type:Array, default:[]},
   month: {type:String, default: ''},
   year: {type:String, default: ''},
   github: {type:String, default: ''},
