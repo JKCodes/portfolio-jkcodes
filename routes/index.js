@@ -3,13 +3,14 @@ var router = express.Router()
 var superagent = require('superagent')
 
 function getResource(res, resource, page) {
+  console.log(process.env.HEROKU_URL || process.env.DEV_URL)
   superagent
-  .get(`http://localhost:3000/api/${resource}`)
+  .get(`${process.env.HEROKU_URL || process.env.DEV_URL}/api/${resource}`)
   .query(null)
   .set('Accept', 'application/json')
   .end((err, response) => {
     if (err) {
-      res.render('error', {message: err})
+      res.render('error', err)
       return
     }
 
@@ -22,7 +23,7 @@ function getResource(res, resource, page) {
 
 function postResource(params, res, resource, page) {
   superagent
-  .post(`http://localhost:3000/api/${resource}`)
+  .post(`${process.env.HEROKU_URL || process.env.DEV_URL}/api/${resource}`)
   .send(params)
   .set('Accept', 'application/json')
   .end((err, response) => {
@@ -37,7 +38,7 @@ function postResource(params, res, resource, page) {
 
 function getResourceById(id, res, resource, page) {
   superagent
-  .get(`http://localhost:3000/api/${resource}/${id}`)
+  .get(`${process.env.HEROKU_URL || process.env.DEV_URL}/api/${resource}/${id}`)
   .query(null)
   .set('Accept', 'application/json')
   .end((err, response) => {
@@ -135,7 +136,7 @@ router.put('/project/:id', function(req, res, next) {
   params['tools'] = tools.split(',').map((tool) => tool.trim())
 
   superagent
-  .put(`http://localhost:3000/api/project/${id}`)
+  .put(`${process.env.HEROKU_URL || process.env.DEV_URL}/api/project/${id}`)
   .send(params)
   .set('Accept', 'application/json')
   .end((err, response) => {
