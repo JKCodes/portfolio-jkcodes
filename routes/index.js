@@ -10,7 +10,7 @@ function getResource(res, resource, page) {
   .set('Accept', 'application/json')
   .end((err, response) => {
     if (err) {
-      res.render('error', err)
+      res.render('error', {message: err})
       return
     }
 
