@@ -3,7 +3,6 @@ var router = express.Router()
 var superagent = require('superagent')
 
 function getResource(res, resource, page) {
-  console.log(process.env.HEROKU_URL || process.env.DEV_URL)
   superagent
   .get(`${process.env.HEROKU_URL || process.env.DEV_URL}/api/${resource}`)
   .query(null)
