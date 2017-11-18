@@ -10,7 +10,7 @@ function getResource(res, resource, page) {
   .set('Accept', 'application/json')
   .end((err, response) => {
     if (err) {
-      res.render('error', {message: err, response: process.env.HEROKU_URL})
+      res.render('error', {message: process.env.HEROKU_URL})
       return
     }
 
