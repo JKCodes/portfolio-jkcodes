@@ -6,7 +6,7 @@ var ProjectSchema = new mongoose.Schema({
   image: {type:String, default: ''},
   extension: {type:String, default: ''},
   demo: {type:String, default: ''},
-  site: {type:String, default: ''},
+  site: {type:String, default: '/nosite'},
   tools: {type:Array, default:[]},
   month: {type:String, default: ''},
   year: {type:String, default: ''},
