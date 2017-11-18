@@ -2,7 +2,7 @@ var Project = require('../models/Project')
 
 module.exports = {
   find: function(params, callback) {
-    Project.find(params, function(err, projects) {
+    Project.find(params, null, {sort: {timestamp: -1}}, function(err, projects) {
       if (err) {
         callback(err, null)
         return
