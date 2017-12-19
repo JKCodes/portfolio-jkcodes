@@ -1,5 +1,14 @@
 var Project = require('../models/Project')
 
+function parseProjectParam(params) {
+  var tools = params.tools
+  var functionalities = params.functionalities
+  params['tools'] = tools.split(',').map((tool) => tool.trim())
+  params['functionalities'] = functionalities.split(',').map((functionality) => functionality.trim())
+
+  return params
+}
+
 module.exports = {
   find: function(params, callback) {
     Project.find(params, null, {sort: {timestamp: -1}}, function(err, projects) {
@@ -24,6 +33,7 @@ module.exports = {
   },
 
   create: function(params, callback) {
+    params = parseProjectParam(params)
     Project.create(params, function(err, project) {
       if (err) {
         callback(err, null)
@@ -35,6 +45,7 @@ module.exports = {
   },
 
   update: function(id, params, callback) {
+    params = parseProjectParam(params)
     Project.findByIdAndUpdate(id, params, {new:true},function(err, project) {
       if (err) {
         callback(err, null)
